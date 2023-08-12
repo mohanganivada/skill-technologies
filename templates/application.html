@@ -1,0 +1,113 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+                <div class="card">
+                    <div class="card-header px-4 py-3">
+                        <h5 class="mb-0">Submit Job Application</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="jobApplicationForm" enctype="multipart/form-data">
+                            
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-3 col-form-label">Full Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputName" name="full_name" placeholder="Enter Full Name" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter Email" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPhone" class="col-sm-3 col-form-label">Phone Number</label>
+                                <div class="col-sm-9">
+                                    <input type="tel" class="form-control" id="inputPhone" name="phone_number" placeholder="Enter Phone Number" required>
+                                </div>
+                            </div>
+
+<div class="row mb-3">
+    <label for="inputJobTitle" class="col-sm-3 col-form-label">Job Title</label>
+    <div class="col-sm-9">
+        <select class="form-select" id="inputJobTitle" name="job_title" required>
+            <option value="" selected disabled>Select Job Title</option>
+            <option value="Software Developer">Software Developer</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <!-- Add more job titles as needed -->
+        </select>
+    </div>
+</div>
+                            <div class="row mb-3">
+                                <label for="inputResume" class="col-sm-3 col-form-label">Resume</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="inputResume" name="resume" accept=".pdf,.doc,.docx" required>
+                                </div>
+                            </div>
+                            <!-- Rest of the job application form fields -->
+
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <div class="d-md-flex d-grid align-items-center gap-3">
+                                     <button type="button" class="btn btn-primary px-4" id="submitApplicationBtn">Submit Application</button>
+
+                                        <button type="reset" class="btn btn-light px-4">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="applicationSuccessMessage" class="text-success"></div>
+            </div>
+        </div>
+        <!--end row-->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script type="text/javascript">
+    $(document).ready(function() {
+        $('#submitApplicationBtn').click(function() {
+            $('#jobApplicationForm').submit(); // Trigger the form submit event
+        });
+
+        $('#jobApplicationForm').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+            var formData = new FormData();
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            formData.append('name', $('#inputName').val());
+            formData.append('email', $('#inputEmail').val());
+            formData.append('phonenumber', $('#inputPhone').val());
+            formData.append('cv', $('#inputResume')[0].files[0]);
+            formData.append('title', $('#inputJobTitle').val());
+
+
+            
+            // Append other form fields similarly
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "submit_application" %}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#applicationSuccessMessage').text(response.data).fadeOut(8000);
+                    $('#jobApplicationForm')[0].reset(); // Reset the form
+                },
+                error: function() {
+                    alert('There was an error submitting the form!');
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <div class="page-content">
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+                <div class="card">
+                    <div class="card-header px-4 py-3">
+                        <h5 class="mb-0">Add New Testimonials</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="addTestimonialsForm" enctype="multipart/form-data">
+                            <div class="row mb-3">
+                                <label for="input35" class="col-sm-3 col-form-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="input1" name="jobtitle" placeholder="Enter Your Name">
+                                </div>
+                            </div>	
+                            <div class="row mb-3">
+                                <label for="input3" class="col-sm-3 col-form-label">Designation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="input2" name="text" placeholder="Designation">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="input4" class="col-sm-3 col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="input3" name="address" rows="3" placeholder="Description"></textarea>
+                                </div>
+                            </div>									
+                            <div class="row mb-3">
+                                <label for="input5" class="col-sm-3 col-form-label">Featured Image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="input4" name="text" placeholder="Required Qualification">
+                                </div>
+                            </div>														
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <div class="d-md-flex d-grid align-items-center gap-3">
+                                        <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                        <button type="reset" class="btn btn-light px-4">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="successMessage" class="text-success"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Make sure jQuery is included before your script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#addTestimonialsForm').submit(function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                
+                var img = $('#input4')[0].files[0];
+                var name = $('#input1').val();
+                var description = $('#input3').val();
+                var designation = $('#input2').val();
+
+                formData.append('img', img);
+                formData.append('name', name);
+                formData.append('description', description);
+                formData.append('designation', designation);
+
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "add_testimonial" %}',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        document.getElementById("input1").value = "";
+                        document.getElementById("input2").value = "";
+                        document.getElementById("input3").value = "";
+                        document.getElementById("input4").value = "";
+                        
+                        $('#successMessage').text(response.data).fadeOut(3000);
+                    },
+                    error: function() {
+                        alert('There was an error submitting the form!');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

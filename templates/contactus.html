@@ -1,0 +1,584 @@
+﻿{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Best Web Development Company in Hyderabad">
+    <link href="{% static 'web/assets/images/favicon/favicon.png' %}" rel="icon" type="image/png">
+    <title>Skill Technologies</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+    <link rel="stylesheet" href="{% static 'web/assets/css/libraries.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/style.css' %}">
+    <style>
+        .tab-content > .active {
+            display: contents;
+        }
+
+
+        .ddl {
+            height: 60px;
+            padding: 0 20px;
+            border-radius: 3px;
+            background-color: #f1f5fe;
+            border: 1px solid black;
+            color: black;
+        }
+    </style>
+    <script>
+        //Only Alphabets allowed Validation  
+        function OnlyAlphabets(evt) {
+            var keyCode = (evt.which) ? evt.which : evt.keyCode
+            if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+
+                return false;
+            return true;
+        }
+
+        //Only Number allowed Validation  
+        function OnlyNumbers(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        //Email Validation  
+        function checkEmail(event) {
+            var emailRex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(event.value)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnSubmit').click(function () {
+                alert("button is clicked")
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="preloader">
+            <div class="loading"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <!-- /.preloader -->
+        <!-- =========================
+        Headerss
+    =========================== -->
+        <header class="header header-light header-full">
+            <nav class="navbar navbar-expand-lg sticky-navbar">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">
+                         <img src="{% static 'web/assets/images/logo/logo-light.png' %}" class="logo-light" alt="logo">
+    <img src="{% static 'web/assets/images/logo/logo-dark.png' %}" class="logo-dark" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button">
+                        <span class="menu-lines"><span></span></span>
+                    </button>
+                    <div class="header__top-right">
+                        <ul class="list-unstyled d-flex justify-content-end align-items-center mb-0">
+                            <li>
+                                <ul class="navbar-actions list-unstyled mb-0 d-flex align-items-center">
+                                    <li class="d-none d-xl-block">
+                                        <a href="{% url 'dashboard' %}" class="btn action__btn-contact">Request A Quote</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'dashboard' %}" class="text-dark">
+                                            <i class="icon-user"></i><span style="font-family: Roboto, sans-serif; font-weight: bold; font-size: 14px;">&nbsp;Employee Login</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- /.navbar-actions -->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.header-top-right -->
+                    <div class="collapse navbar-collapse" id="mainNavigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav__item has-dropdown">
+                                <a href="home.aspx" class="nav__item-link">Home</a>
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item has-dropdown">
+                                <a href="aboutus.aspx" class="nav__item-link">Company</a>                                
+                                <!-- /.dropdown-menu -->
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item has-dropdown">
+                                <a href="it-solutions.aspx" class="nav__item-link">IT Solutions</a>
+                                <ul class="dropdown-menu wide-dropdown-menu">
+                                    <li class="nav__item">
+                                        <div class="row mx-0">
+                                            <div class="col-sm-6 dropdown-menu-col">
+                                                <a href="it-solutions.aspx" class="nav__item-link dropdown-menu-title">IT Solutions</a>
+                                                <ul class="nav flex-column">
+                                                    <li class="nav__item"><a class="nav__item-link" href="application-development.aspx">Application
+                              Development</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="mobile-applications.aspx">Mobile
+                              Applications</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="ecommerce-applications.aspx">E-commerce
+                              Applications</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">IT
+                              Consulting</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Data
+                              Science</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">IT Support</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                </ul>
+                                            </div>
+                                            <!-- /.col-sm-6 -->
+                                            <div class="col-sm-6 dropdown-menu-col">
+                                                <a href="industries.aspx" class="nav__item-link dropdown-menu-title">Industries</a>
+                                                <ul class="nav flex-column">
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Education,
+                              Non-Profit</a></li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="accountandfinance.aspx">Accounting,
+                              Finance</a></li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Gaming
+                              & Entertainments</a></li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Beauty
+                              &
+                              Personal Care</a></li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Legal,
+                              Law
+                              Firms</a></li>
+                                                    <!-- /.nav-item -->
+                                                    <li class="nav__item"><a class="nav__item-link" href="#">Manufacturing</a>
+                                                    </li>
+                                                    <!-- /.nav-item -->
+                                                </ul>
+                                            </div>
+                                            <!-- /.col-sm-6 -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </li>
+                                    <!-- /.nav-item -->
+                                </ul>
+                                <!-- /.dropdown-menu -->
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item has-dropdown">
+                                <a href="seo.aspx" class="nav__item-link">Digital Marketing</a>      
+                                <!-- /.dropdown-menu -->
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item has-dropdown">
+                                <a href="blog.aspx" class="nav__item-link">Blog</a>  
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item has-dropdown">
+                                <a href="certifications.aspx" class="nav__item-link">Learn</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav__item">
+                                        <a href="certifications.aspx" class="nav__item-link">Internship & Certifications</a>
+                                    </li>
+                                    <!-- /.nav-item -->                                   
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__item-link  open-login-popup">Login</a>
+                                    </li>
+                                    <!-- /.nav-item -->
+                                </ul>
+                                <!-- /.dropdown-menu -->
+                            </li>
+                            <!-- /.nav-item -->
+                            <li class="nav__item">
+                                <a href="contactus.aspx" class="nav__item-link active">Contact</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-menu -->
+                        </li><!-- /.nav-item -->
+                        <!-- /.nav-item -->
+                        </ul><!-- /.navbar-nav -->
+                        <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="action__btn action__btn-search ml-30"><i class="icon-search"></i></a>
+                    </div>
+                </div>
+                <!-- /.container -->
+            </nav>
+            <!-- /.navabr -->
+        </header>
+        <!-- /.Header -->
+
+
+        <!-- ========================= 
+            Google Map
+    =========================  -->
+        <section class="p-0">
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <div style="width: 100%">
+
+                        <iframe class="gmap_iframe" width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1987.1431437701779!2d78.36826888841047!3d17.469789733102843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb917b0ecba8b5%3A0xee8416812090c906!2sSkill%20Technologies!5e0!3m2!1sen!2sin!4v1651572586214!5m2!1sen!2sin"><a href="https://www.gps.ie/sport-gps/">bike gps</a></iframe>
+                    </div>
+                    <a href="https://www.fridaynightfunkin.net/">FNF PC</a>
+                </div>
+                <style>
+                    .mapouter {
+                        position: relative;
+                        text-align: right;
+                        width: 100%;
+                        height: 350px;
+                    }
+
+                    .gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+                        width: 100%;
+                        height: 350px;
+                    }
+
+                    .gmap_iframe {
+                        height: 350px !important;
+                    }
+                </style>
+            </div>
+        </section>
+        <!-- /.page-title -->
+
+        <!-- ==========================
+        contact layout 1
+    =========================== -->
+        <section class="contact-layout1 pt-0 mt--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-panel d-flex flex-wrap">
+                            <div class="contact-panel__info">
+                                <div class="bg-img">
+                                     <img src="{% static 'web/assets/images/backgrounds/3.jpg' %}" alt="banner">
+                                </div>
+                                <div class="contact-block">
+                                    <h5 class="contact-block__title">Our Location</h5>
+                                    <ul class="contact-block__list list-unstyled">
+                                        <li>
+                                            Plot No 14, Green Hamlet, Silpa Park, Kondapur, Hyderabad, Telangana - 500084
+                                            <br>
+                                            India
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.contact-panel__info__block -->
+                                <div class="contact-block">
+                                    <h5 class="contact-block__title">Quick Contact</h5>
+                                    <ul class="contact-block__list list-unstyled">
+                                        <li><a href="mailto:info@skilltechnologies.in"></a>Email: info@skilltechnologies.in</li>
+                                        <li><a href="mailto:info@skilltechnologies.in"></a>Support: contact@skilltechnologies.in</li>
+                                    </ul>
+                                </div>
+                                <!-- /.contact-panel__info__block -->
+                                <div class="contact-block">
+                                    <h5 class="contact-block__title">Opening Hours</h5>
+                                    <ul class="contact-block__list list-unstyled">
+                                        <li>Monday - Saturday</li>
+                                        <li>09:00 AM - 06:30 PM</li>
+                                    </ul>
+                                </div>
+                                <!-- /.contact-panel__info__block -->
+                                <p class="color-white mb-20">
+                                    If you have any questions or need help, feel free to contact with our team.
+                                </p>
+                                <a href="tel:04035843505" class="phone-number">
+                                    <i class="icon-phone"></i><span>04035843505</span>
+                                </a><br>
+                                <a href="tel:9014183086" class="phone-number">
+                                    <i class="icon-phone"></i><span>901 418 3086</span>
+                                </a>
+                            </div>
+                            <form class="contact-panel__form" runat="server" id="contactForm">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h4 class="contact-panel__title">Get In Touch</h4>
+                                        <p class="contact-panel__desc mb-20">
+                                            Our deep pool of certified engineers and IT staff are ready to
+                      help you to keep your IT business safe & ensure high availability.
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input name="txtName" type="text" id="txtName" placeholder="Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- /.col-lg-6 -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input name="txtEmail" type="text" id="txtEmail" placeholder="Email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- /.col-lg-6 -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input name="txtMobile" type="tel" maxlength="10" id="txtMobile" placeholder="Phone" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- /.col-lg-6 -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <select name="ddlserviceName" id="ddlserviceName" class="ddl" style="display: none;">
+                                                <option value="0">Application Development</option>
+                                                <option value="1">Website Development</option>
+                                                <option value="2">TCS Subscription</option>
+                                                <option value="3">SEO Services</option>
+                                                <option value="4">Social Media Marketing</option>
+                                                <option value="5">Youtbe Marketing</option>
+                                                <option value="6">Data Science</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-lg-6 -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <textarea name="txtMessage" rows="4" cols="20" id="txtMessage" placeholder="Describe your inquirey!" class="form-control" style="border: 1px solid;"></textarea>
+                                        </div>
+                                        <a id="btnSubmitReq" class="btn btn__primary btn__icon btn__xhight mt-10 icon-arrow-right" href="#">
+                                            <span style="font-size:small;font-family:Arial, Verdana;">Submit Request</span><i class="icon-arrow-right"></i></a>
+                                    </div>
+                                    <!-- /.col-lg-12 -->
+                                </div>
+                                <!-- /.row -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.contact layout 1 -->
+
+        <!-- ==========================
+       Contact Info
+    ============================ -->
+        <section class="contact-info pt-0 pb-70">
+            <div class="container">
+                <div class="row">
+                    <!-- Contact panel #1 -->
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="contact-info-box contact-panel">
+                            <h4 class="contact__info-box-title">US Office</h4>
+                            <ul class="contact__info-list list-unstyled" style="color: black;">
+                                <li>Email: <a href="mailto:info@skilltechnologies.in" style="color: darkblue;">info@skilltechnologies.in</a></li>
+                                <li>Address: 722 Grant Street, Suite G Herndon, VA 20170 USA And 1020 Elden Street, Suite 102 Herndon, VA
+                  20170 USA</li>
+                                <li>Phone: <a href="tel:04035843505" style="color: darkblue;">040 - 3584 3505, 901 418 3086</a></li>
+                                <li>Hours: Mon-Fri: 8am – 7pm</li>
+                            </ul>
+                            <!-- /.contact__info-list -->
+                        </div>
+                        <!-- /.contact-info-box -->
+                    </div>
+                    <!-- /.col-lg-4 -->
+                </div>
+            </div>
+        </section>
+        <!-- Contact panel #2 -->
+        <!-- ========================
+        Footer
+      ========================== -->
+        <footer class="footer bg-secondary">
+            <div class="container">
+                <div class="footer-top pt-50 pb-30">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-2 col-lg-4">
+                       <img src="{% static 'web/assets/images/logo/logo-light.png' %}" class="logo-light" alt="logo">
+                        </div>
+                        <!-- /.col-lg-2 -->
+                        <div class="col-sm-8 col-md-4 col-lg-3">
+                            <!--  <h6 class="footer-top__title">Newsletter signup</h6> -->
+                        </div>                       
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-top -->
+                <div class="footer-primary">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-3 footer-widget footer-widget-about">
+                            <div class="footer-widget__content">
+                                <div class="contact-info">
+                                    <h6 class="footer-widget__title">Quick Contact</h6>
+                                    <ul class="contact-list list-unstyled">
+                                        <li class="color-gray">If you have any questions or need help, feel free to contact with our team.
+                                        </li>
+                                        <li class="mt-20 mb-20">
+                                            <a href="tel:04035843505" class="phone-number">
+                                                <i class="icon-phone"></i><span>040-3584 3505</span>
+                                            </a>
+                                        </li>
+                                          <li class="color-body">#14, Green Hamlet Rd<br>Hanuman Nagar, Silpa Park<br> Kondapur, Hyderabad<br>Telangana 500084
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.contact-info -->
+                                <ul class="social-icons list-unstyled mb-0">
+                                    <li><a href="https://www.facebook.com/skilltechnologies.in"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.instagram.com/skilltechnologies/"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://twitter.com/SkillTech_in"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/authwall?trk=ripf&trkInfo=AQFqP3OOW4QcAwAAAXnCyu8w6CINhPsWIVUWRoY_JUigzZGzBLSMwmLbX5PwvFe15Xh9rw_g_Bz1ctXJX7HqaO2nGSxCL6vGjHaFMUaQ0yQFrLHvMMz1wvIkuYBX-Ocrr6We1P8=&originalReferer=https://skilltechnologies.in/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fskill-technologies-pvt-ltd%2F"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="https://in.pinterest.com/skilltechnologies/"><i class="fab fa-pinterest"></i></a></li>
+                                    <li><a href="https://api.whatsapp.com/send/?phone=919014183086&text&app_absent=0"><i class="fab fa-whatsapp"></i></a></li>
+                                </ul>
+                                <!-- /.social-icons -->
+                            </div>
+                            <!-- /.footer-widget__content -->
+                        </div>
+                        <!-- /.col-xl-2 -->
+                        <div class="col-sm-6 col-md-6 col-lg-2 offset-lg-1 footer-widget footer-widget-nav">
+                            <h6 class="footer-widget__title">Company</h6>
+                            <div class="footer-widget__content">
+                                <nav>
+                                    <ul class="list-unstyled">
+                                        <li><a href="aboutus.aspx">About Us</a></li>
+                                        <li><a href="leadership-team.aspx">Meet Our Team</a></li>
+                                        <li><a href="blog.aspx">News & Media</a></li>
+                                        <li><a href="#">Case Studies</a></li>
+                                        <li><a href="#">Contacts</a></li>
+                                        <li><a href="#">Investors</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.footer-widget__content -->
+                        </div>
+                        <!-- /.col-lg-2 -->
+                        <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                            <h6 class="footer-widget__title">Solutions</h6>
+                            <div class="footer-widget__content">
+                                <nav>
+                                    <ul class="list-unstyled">
+                                        <li><a href="#">Appllication Development</a></li>
+                                        <li><a href="#">Mobile Applications</a></li>
+                                        <li><a href="#">Digital Marketing</a></li>
+                                        <li><a href="#">IT Consulting</a></li>
+                                        <li><a href="#">Data Science</a></li>
+                                        <li><a href="#">IT Support</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.footer-widget__content -->
+                        </div>
+                        <!-- /.col-lg-2 -->
+                        <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                            <h6 class="footer-widget__title">Resources</h6>
+                            <div class="footer-widget__content">
+                                <nav>
+                                    <ul class="list-unstyled">
+                                        <li><a href="#">Pricing and plans</a></li>
+                                        <li><a href="#">Terms of Service</a></li>
+                                        <li><a href="#">Help & FAQ</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="#">Site map</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.footer-widget__content -->
+                        </div>
+                        <!-- /.col-lg-2 -->
+                        <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                            <h6 class="footer-widget__title">Download</h6>
+                            <div class="footer-widget__content">
+                                <a href="#" class="btn btn__white btn__download mb-20">
+                                    <i class="fab fa-apple"></i>
+                                    <span>App Store</span>
+                                </a>
+                                <a href="#" class="btn btn__white btn__download mb-20">
+                                    <i class="fab fa-google-play"></i>
+                                    <span>Google Play</span>
+                                </a>
+                            </div>
+                            <!-- /.footer-widget__content -->
+                        </div>
+                        <!-- /.col-lg-2 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-primary -->
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center pb-40">
+                        <span class="fz-14">&copy; 2023 Skill Technologies, All Rights Reserved.</span>
+                        <a class="fz-14 color-primary" href="http://skilltechnologies.in">skilltechnologies.in</a>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </footer>
+        <!-- /.Footer -->
+        <button id="scrollTopBtn"><i class="fas fa-long-arrow-alt-up"></i></button>
+
+        <div class="login-popup" id="login-popup">
+            <div class="login-popup-wrapper">
+                <form class="login-popup__form">
+                    <h3 class="login-popup__title">Intern Login !</h3>
+                    <!-- <p class="login-popup__desc">Employee Login</p> -->
+                    <div class="form-group mb-20">
+                        <i class="icon-mail input-icon"></i>
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group mb-20">
+                        <i class="icon-lock input-icon"></i>
+                        <input type="password" class="form-control" placeholder="********">
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-20">
+                        <div class="custom-control custom-checkbox d-flex align-items-center">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Remember Me!</label>
+                        </div>
+                        <a href="#" class="fz-14 font-weight-bold color-secondary">Forget Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn__primary btn__block btn__xl">
+                        <span>Login</span>
+                        <i class="icon-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- /.login-popup -->
+
+        <div class="search-popup">
+            <button type="button" class="search-popup__close"><i class="fas fa-times"></i></button>
+            <form class="search-popup__form">
+                <input type="text" class="search-popup__form__input" placeholder="Type Words Then Enter">
+                <button class="search-popup__btn"><i class="icon-search"></i></button>
+            </form>
+        </div>
+        <!-- /. search-popup -->
+    </div>
+    <!-- /.wrapper -->
+
+    <script src="{% static 'web/assets/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/plugins.js' %}"></script>
+    <script src="{% static 'web/assets/js/main.js' %}"></script>
+</body>
+
+</html>

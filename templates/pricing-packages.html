@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-9 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="mb-0">Add New Package</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form id="addPackageForm" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <label for="input1" class="col-sm-3 col-form-label">Package Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="input1" name="package_name" placeholder="Enter Package Name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="input2" class="col-sm-3 col-form-label">Package Type</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="input2" name="package_type">
+                                    <option value="Free">Free</option>
+                                    <option value="Bronze">Bronze</option>
+                                    <option value="Silver">Silver</option>
+                                    <option value="Gold">Gold</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="input3" class="col-sm-3 col-form-label">Price</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="input3" name="price" placeholder="Enter Price">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="input4" class="col-sm-3 col-form-label">Package Details</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="input4" name="package_details" rows="4" placeholder="Enter Package Details"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                    <button type="reset" class="btn btn-light px-4">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="successMessage" class="text-success"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#addPackageForm').submit(function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+
+            var package_name = $('#input1').val();
+            var package_type = $('#input2').val();
+            var price = $('#input3').val();
+            var package_details = $('#input4').val();
+
+            formData.append('package_name', package_name);
+            formData.append('package_type', package_type);
+            formData.append('price', price);
+            formData.append('package_details', package_details);
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "add_package" %}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    document.getElementById("input1").value = "";
+                    document.getElementById("input2").value = "Free";
+                    document.getElementById("input3").value = "";
+                    document.getElementById("input4").value = "";
+
+                    $('#successMessage').text(response.data).fadeOut(3000);
+                },
+                error: function() {
+                    alert('There was an error submitting the form!');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

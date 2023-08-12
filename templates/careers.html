@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-9 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="mb-0">Add New Career Opportunity</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form id="addCareerForm" enctype="multipart/form-data">
+
+                        <div class="row mb-3">
+                            <label for="inputTitle" class="col-sm-3 col-form-label">Job Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="input1" name="job_title" placeholder="Enter Job Title">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputType" class="col-sm-3 col-form-label">Employee Type</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="input2" name="employee_type">
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Internship">Internship</option>
+                                </select>
+                            </div>
+                        </div>
+						<div class="row mb-3">
+							<label for="inputLocation" class="col-sm-3 col-form-label">Job Location</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="input3" name="job_location" placeholder="Enter Job Location">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputQualification" class="col-sm-3 col-form-label">Required Qualification</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="input4" name="required_qualification" placeholder="Enter Required Qualification">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputExperience" class="col-sm-3 col-form-label">Required Experience</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="input5" name="required_experience" placeholder="Enter Required Experience">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputSalary" class="col-sm-3 col-form-label">Salary</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="input6" name="salary" placeholder="Enter Salary">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputSkills" class="col-sm-3 col-form-label">Skills</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="input7" name="skills" placeholder="Enter Skills">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputDescription" class="col-sm-3 col-form-label">Job Description</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" id="input8" name="job_description" placeholder="Enter Job Description"></textarea>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="inputRoles" class="col-sm-3 col-form-label">Roles and Responsibilities</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" id="input9" name="roles_responsibilities" placeholder="Enter Roles and Responsibilities"></textarea>
+							</div>
+						</div>
+						
+                        <!-- Include other form fields here -->
+
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                    <button type="reset" class="btn btn-light px-4">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="successMessage" class="text-success"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#addCareerForm').submit(function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            
+            // Update input field names to match those in the form
+            var job_title = $('#input1').val();
+            var employee_type = $('#input2').val();
+            var job_location = $('#input3').val();
+            var required_qualification = $('#input4').val();
+            var required_experience = $('#input5').val();
+            var salary = $('#input6').val();
+            var skills = $('#input7').val();
+            var job_description = $('#input8').val();
+            var roles_responsibilities = $('#input9').val();
+
+            formData.append('job_title', job_title);
+            formData.append('employee_type', employee_type);
+            formData.append('job_location', job_location);
+            formData.append('required_qualification', required_qualification);
+            formData.append('required_experience', required_experience);
+            formData.append('salary', salary);
+            formData.append('skills', skills);
+            formData.append('job_description', job_description);
+            formData.append('roles_responsibilities', roles_responsibilities);
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "add_career" %}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    document.getElementById("input1").value = "";
+                    document.getElementById("input2").value = "";
+                    document.getElementById("input3").value = "";
+                    document.getElementById("input4").value = "";
+                    document.getElementById("input5").value = "";
+                    document.getElementById("input6").value = "";
+                    document.getElementById("input7").value = "";
+                    document.getElementById("input8").value = "";
+                    document.getElementById("input9").value = "";
+                    
+                    $('#successMessage').text(response.data).fadeOut(3000);
+                },
+                error: function() {
+                    alert('There was an error submitting the form!');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
